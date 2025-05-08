@@ -10,6 +10,8 @@ phases:
       - npm install -g serverless
   pre_build:
     commands:
+      - echo "Inicializando credenciais serverless"
+      - export SERVERLESS_ACCESS_KEY=$SERVERLESS_ACCESS_KEY
       - echo "Instalando dependências Python com plugin serverless-python-requirements"
       - serverless plugin install -n serverless-python-requirements
   build:
