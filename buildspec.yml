@@ -8,8 +8,6 @@ phases:
     commands:
       - echo "Instalando Serverless Framework"
       - npm install -g serverless
-      - echo "Instalando dependências do projeto"
-      - npm install
   pre_build:
     commands:
       - echo "Instalando dependências Python com plugin serverless-python-requirements"
