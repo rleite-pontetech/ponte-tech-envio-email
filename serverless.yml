@@ -29,10 +29,10 @@ plugins:
 
 custom:
   pythonRequirements:
-    dockerizePip: true
+    dockerizePip: false
     slim: false
     zip: true
-    fileName: requirements.txt
+    fileName: ./requirements.txt
     useDownloadCache: true
     useStaticCache: true
     layer: true
