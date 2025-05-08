@@ -1,0 +1,34 @@
+service: email-contact-form
+
+provider:
+  name: aws
+  runtime: python3.11
+  region: us-east-1
+  environment:
+    EMAIL_DESTINATARIO: contato@ponte-tech.com.br
+    SES_SOURCE_EMAIL: contato@ponte-tech.com.br
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Action:
+            - "ses:SendEmail"
+            - "ses:SendRawEmail"
+          Resource: "*"
+
+functions:
+  sendEmail:
+    handler: src/handlers/email_sender.handler
+    events:
+      - httpApi:
+          path: /send
+          method: post
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: false
+    zip: true
+    slim: true
