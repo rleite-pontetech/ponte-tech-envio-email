@@ -3,12 +3,21 @@ version: 0.2
 phases:
   install:
     runtime-versions:
+      python: 3.11
       nodejs: 18
     commands:
+      - echo "Instalando Serverless Framework"
       - npm install -g serverless
+      - echo "Instalando dependências do projeto"
+      - npm install
   pre_build:
     commands:
-      - npm install
+      - echo "Instalando dependências Python com plugin serverless-python-requirements"
+      - serverless plugin install -n serverless-python-requirements
   build:
     commands:
+      - echo "Fazendo deploy com Serverless Framework"
       - serverless deploy --stage dev
+artifacts:
+  files:
+    - '**/*'
