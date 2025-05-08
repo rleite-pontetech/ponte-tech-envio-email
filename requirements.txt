@@ -13,4 +13,4 @@ six
 typing-inspection
 typing_extensions
 urllib3
-pydantic[email]
+email-validator

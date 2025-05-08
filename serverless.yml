@@ -29,6 +29,6 @@ plugins:
 
 custom:
   pythonRequirements:
-    dockerizePip: false
+    dockerizePip: true
+    slim: false
     zip: true
-    slim: true
