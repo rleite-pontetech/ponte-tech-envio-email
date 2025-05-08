@@ -6,6 +6,7 @@ phases:
       python: 3.11
       nodejs: 18
     commands:
+      - rm -rf /root/.cache/serverless-python-requirements
       - echo "Instalando Serverless Framework"
       - npm install -g serverless
   pre_build:
