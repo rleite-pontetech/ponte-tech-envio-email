@@ -7,8 +7,8 @@ phases:
       nodejs: 18
     commands:
       - rm -rf /root/.cache/serverless-python-requirements
-      - echo "Instalando Serverless Framework"
-      - npm install -g serverless
+      - echo "Instalando Serverless Framework versão 3"
+      - npm install -g serverless@3
   pre_build:
     commands:
       - echo "Inicializando credenciais serverless"
