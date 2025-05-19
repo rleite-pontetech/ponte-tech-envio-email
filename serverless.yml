@@ -34,7 +34,6 @@ custom:
     dockerizePip: true
     slim: false
     zip: true
-    fileName: requirements.txt
     useDownloadCache: true
     useStaticCache: true
     layer: true
