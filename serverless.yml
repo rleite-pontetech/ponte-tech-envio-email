@@ -19,6 +19,8 @@ provider:
 functions:
   sendEmail:
     handler: src/handlers/email_sender.handler
+    layers:
+      - { Ref: PythonRequirementsLambdaLayer }
     events:
       - httpApi:
           path: /send
@@ -29,10 +31,10 @@ plugins:
 
 custom:
   pythonRequirements:
-    dockerizePip: false
+    dockerizePip: true
     slim: false
     zip: true
-    fileName: ./requirements.txt
+    fileName: requirements.txt
     useDownloadCache: true
     useStaticCache: true
     layer: true
