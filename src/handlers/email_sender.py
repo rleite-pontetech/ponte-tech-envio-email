@@ -4,8 +4,22 @@ from src.dto.response_dto import ResponseDto
 from src.services.email_sender import format_email
 from src.repositories.email_sender import send_email_via_ses
 
+CORS_HEADERS = {
+    "Access-Control-Allow-Origin": "*",  
+    "Access-Control-Allow-Headers": "Content-Type,Authorization",
+    "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+    "Access-Control-Allow-Credentials": "true"
+}
+
 def handler(event, context):
     try:
+        if event.get("httpMethod", "") == "OPTIONS":
+            return {
+                "statusCode": 200,
+                "headers": CORS_HEADERS,
+                "body": json.dumps({"message": "CORS preflight check OK"})
+            }
+
         body = json.loads(event.get("body", "{}"))
         contact = ContactRequestDto(**body)
 
@@ -16,6 +30,7 @@ def handler(event, context):
         print("✅ E-mail enviado com sucesso.")
         return {
             "statusCode": 200,
+            "headers": CORS_HEADERS,
             "body": response.json()
         }
 
@@ -24,5 +39,6 @@ def handler(event, context):
         response = ResponseDto(status="error", message=str(e))
         return {
             "statusCode": 400,
+            "headers": CORS_HEADERS,
             "body": response.json()
         }
