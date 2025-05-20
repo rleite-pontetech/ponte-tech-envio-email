@@ -31,4 +31,6 @@ plugins:
 
 custom:
   pythonRequirements:
-    dockerizePip: true
+    dockerizePip: false
+    fileName: requirements.txt
+    layer: true
