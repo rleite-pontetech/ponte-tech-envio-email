@@ -40,6 +40,9 @@ functions:
       - httpApi:
           path: /send
           method: post
+      - httpApi:
+         path: /send
+         method: options
 
 plugins:
   - serverless-python-requirements
