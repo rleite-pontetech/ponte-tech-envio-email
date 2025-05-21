@@ -25,6 +25,7 @@ functions:
       - httpApi:
           path: /send
           method: post
+          cors: true
 
 plugins:
   - serverless-python-requirements
