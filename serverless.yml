@@ -3,6 +3,21 @@ service: email-contact-form
 provider:
   name: aws
   runtime: python3.11
+  httpApi:
+    cors:
+      allowedOrigins:
+        - '*'
+      allowedMethods:
+        - GET
+        - POST
+        - OPTIONS
+        - PUT
+        - DELETE
+        - PATCH
+      allowedHeaders:
+        - Content-Type
+        - Authorization
+      allowCredentials: false
   region: us-east-1
   environment:
     EMAIL_DESTINATARIO: contato@ponte-tech.com.br
@@ -25,7 +40,6 @@ functions:
       - httpApi:
           path: /send
           method: post
-          cors: true
 
 plugins:
   - serverless-python-requirements
