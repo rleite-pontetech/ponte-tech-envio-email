@@ -15,6 +15,10 @@ provider:
             - "ses:SendEmail"
             - "ses:SendRawEmail"
           Resource: "*"
+        - Effect: "Allow"
+          Action:
+            - "dynamodb:PutItem"
+          Resource: "arn:aws:dynamodb:us-east-1:123676445924:table/envio_contato"
 
 functions:
   sendEmail:

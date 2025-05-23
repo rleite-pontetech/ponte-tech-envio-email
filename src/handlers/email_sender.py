@@ -3,6 +3,7 @@ from src.dto.request_dto import ContactRequestDto
 from src.dto.response_dto import ResponseDto
 from src.services.email_sender import format_email
 from src.repositories.email_sender import send_email_via_ses
+from src.repositories.dynamo_sender import save_contact_to_dynamodb
 
 CORS_HEADERS = {
     "Access-Control-Allow-Origin": "*",  
@@ -22,6 +23,8 @@ def handler(event, context):
 
         body = json.loads(event.get("body", "{}"))
         contact = ContactRequestDto(**body)
+
+        save_contact_to_dynamodb(contact)
 
         email_data = format_email(contact)
         send_email_via_ses(email_data)
