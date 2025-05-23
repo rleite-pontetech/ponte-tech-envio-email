@@ -4,13 +4,7 @@ from src.dto.response_dto import ResponseDto
 from src.services.email_sender import format_email
 from src.repositories.email_sender import send_email_via_ses
 from src.repositories.dynamo_sender import save_contact_to_dynamodb
-
-CORS_HEADERS = {
-    "Access-Control-Allow-Origin": "*",  
-    "Access-Control-Allow-Headers": "Content-Type,Authorization",
-    "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
-    "Access-Control-Allow-Credentials": "true"
-}
+from src.config.settings import CORS_HEADERS
 
 def handler(event, context):
     try:

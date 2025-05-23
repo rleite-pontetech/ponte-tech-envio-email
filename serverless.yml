@@ -22,6 +22,7 @@ provider:
   environment:
     EMAIL_DESTINATARIO: contato@ponte-tech.com.br
     SES_SOURCE_EMAIL: contato@ponte-tech.com.br
+    USER_POOL_ID: us-east-1_4vX0x2g7E
   iam:
     role:
       statements:
@@ -34,6 +35,14 @@ provider:
           Action:
             - "dynamodb:PutItem"
           Resource: "arn:aws:dynamodb:us-east-1:123676445924:table/envio_contato"
+        - Effect: "Allow"
+          Action:
+            - "dynamodb:PutItem"
+          Resource: "arn:aws:dynamodb:us-east-1:123676445924:table/usuarios"
+        - Effect: "Allow"
+          Action:
+            - "cognito-idp:AdminAddUserToGroup"
+          Resource: "arn:aws:cognito-idp:us-east-1:123676445924:userpool/us-east-1_NtC5KY3kF"
 
 functions:
   sendEmail:
@@ -47,6 +56,17 @@ functions:
       - httpApi:
          path: /send
          method: options
+  cognitoAuth:
+    handler: src/handlers/cognito_auth.handler
+    layers:
+      - { Ref: PythonRequirementsLambdaLayer }
+    events:
+      - cognitoUserPool:
+          pool: ponte-tech-user-pool
+          trigger: PostConfirmation
+    environment:
+      USER_POOL_ID: ${env:USER_POOL_ID}
+      DYNAMODB_TABLE: us-east-1_4vX0x2g7E
 
 plugins:
   - serverless-python-requirements
