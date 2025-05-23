@@ -14,7 +14,8 @@ CORS_HEADERS = {
 
 def handler(event, context):
     try:
-        if event.get("httpMethod", "") == "OPTIONS":
+        method = event.get("requestContext", {}).get("http", {}).get("method", "")
+        if method == "OPTIONS":
             return {
                 "statusCode": 200,
                 "headers": CORS_HEADERS,
